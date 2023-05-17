@@ -15,7 +15,18 @@
                     <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
                         {{ __('Dashboard') }}
                     </x-nav-link>
+
+                    <x-nav-link :href="route('test')" :active="request()->routeIs('test')">
+                      {{ __('My test') }}
+                  </x-nav-link>
+
+                  <x-nav-link :href="route('student')" :active="request()->routeIs('student')">
+                    {{ __('My student') }}
+                </x-nav-link>
                 </div>
+
+
+
             </div>
 
             <!-- Settings Dropdown -->
@@ -36,6 +47,14 @@
                     <x-slot name="content">
                         <x-dropdown-link :href="route('profile.edit')">
                             {{ __('Profile') }}
+                        </x-dropdown-link>
+
+                        <x-dropdown-link :href="route('test')">
+                          {{ __('My Test') }}
+                        </x-dropdown-link>
+
+                        <x-dropdown-link :href="route('student')">
+                          {{ __('student') }}
                         </x-dropdown-link>
 
                         <!-- Authentication -->
@@ -83,6 +102,15 @@
                 <x-responsive-nav-link :href="route('profile.edit')">
                     {{ __('Profile') }}
                 </x-responsive-nav-link>
+
+                <x-responsive-nav-link :href="route('test')">
+                  {{ __('My test') }}
+                </x-responsive-nav-link>
+
+                <x-responsive-nav-link :href="route('student')">
+                  {{ __('My Student') }}
+                </x-responsive-nav-link>
+
 
                 <!-- Authentication -->
                 <form method="POST" action="{{ route('logout') }}">
