@@ -81,8 +81,9 @@ class CategoryController extends AdminController
 
         $form->text('title', __('Name'))->required();
         $form->icon('icon', __('Icon'));
+        $form->icon('icon', __('Icon'));
         $form->select('father_id', __('Father Id'))->options($this->categoriesSelectArray)->default(0);
-        $form->text('user_id', __('User Id'))->default($userId);
+        $form->int('user_id', __('User Id'))->default($userId);
         $form->textarea('description', __('Description'));
         // $form->text('status', __('Status'));
         $form->radio('status',__('Status'))->options(['draft' => 'Darft', 'closed'=> 'Closed', 'public'=>'public'])->default('draft');
