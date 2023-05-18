@@ -1,4 +1,14 @@
+ 根据数据库生成文件
+ php artisan admin:generate
+php artisan make:model ModelName -m
+- make:controller - 生成控制器
+- make:migration - 生成数据迁移文件
+- make:seeder - 生成 seeder 文件
+- make:factory - 生成模型工厂文件
+- make:policy - 生成授权策略文件
 
+
+备份
 mysqldump -u root  --add-drop-database > database/backup23051806.sql
 --add-drop-table
 --no-data
@@ -122,3 +132,21 @@ https://github.com/LaravelDaily/Larav...
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/5.0.0-alpha1/js/bootstrap.min.js" integrity="sha384-oesi62hOLfzrys4LxRF63OJCXdXDipiYWBnvTl9Y9/TRlw5xlKIEHpNyvvDShgf/" crossorigin="anonymous"></script>
 </body>
 </html>
+
+在 Git 中,如果你还未提交修改(commit),可以很轻易地撤销修改。
+主要有两种方式:
+1. 撤销对文件的修改 - git checkout -- <file>
+此命令会以 HEAD 中的版本来覆盖你的工作目录中的文件。
+例如,如果你修改了 app.js 文件,但还未提交,你可以运行:
+bash
+git checkout -- app.js
+此举会撤销你对 app.js 的修改。
+2. 撤销所有未提交的修改 - git reset --hard
+此命令会重置你的工作目录到 HEAD 指向的提交。这会撤销所有未提交的修改。
+bash 
+git reset --hard
+注意,此命令是彻底撤销你工作目录中的所有修改的最强硬方法。你的修改会被删除,无法恢复。
+所以,在使用之前一定要确定,因为这可能导致你丢失重要数据。
+如果你只想撤销某些修改,我强烈建议使用 git checkout -- <file> 来选择性地撤销修改。这是一种更温和的方式,也更不易出错。
+如果你已经提交了修改,那么就需要使用 git revert 或 git reset 来回滚提交了,这就是另一个话题了。
+希望这个解释能帮助到你!如果有其它 Git 相关的问题,欢迎在评论中提出。
