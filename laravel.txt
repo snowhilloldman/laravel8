@@ -1,3 +1,35 @@
+
+mysqldump -u root  --add-drop-database > database/backup23051806.sql
+--add-drop-table
+--no-data
+
+mysqldump -h 127.0.0.1 -u root --column-statistics=0 bitnami_myapp > ~/code/docker/database/bitnami_myapp_$(date +%Y_%m_%d_%H_%M_%S).sql
+
+
+DROP TABLE IF EXISTS `posts`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `posts` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `title` varchar(255) NOT NULL,
+  `icon` varchar(255) DEFAULT NULL,
+  `category_id` int(11) DEFAULT 0,
+  `user_id` int(11) DEFAULT 0,
+  `content` mediumtext DEFAULT NULL,
+  `status` enum('draft','closed','public') DEFAULT 'draft',
+  `view_amount` int(11) DEFAULT 0,
+  `attachment_amount` int(11) DEFAULT 0,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  `_id` int(11) DEFAULT 0,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+
+导入时import : sed -i 's/$/\\$/g' db.sql
+
+mysqldump -u root -p  db_name > db.sql
+
 composer create-project laravel/laravel studentcrud-app
 
 php artisan make:migration create_students_table

@@ -36,7 +36,7 @@ class CategoryController extends AdminController
         $grid->column('amount', __('amount'));
         $grid->column('description', __('Description'));
         $grid->column('status', __('Status'));
-        $grid->column('created_at', __('Created at'));
+        $grid->column('created_at', __('Created at'))->hide();
         $grid->column('updated_at', __('Updated at'));
 
         return $grid;
@@ -78,16 +78,20 @@ class CategoryController extends AdminController
         $this->categoriesSelectGenerate();
 
         $form = new Form(new Category());
+        
 
         $form->text('title', __('Name'))->required();
-        $form->icon('icon', __('Icon'));
+
         $form->icon('icon', __('Icon'));
         $form->select('father_id', __('Father Id'))->options($this->categoriesSelectArray)->default(0);
-        $form->int('user_id', __('User Id'))->default($userId);
+
+
+        // $form->text('user_id', __('User Id'))->default($userId)->disable();
+        // $form->ckeditor('description', __('Description'));
         $form->textarea('description', __('Description'));
         // $form->text('status', __('Status'));
         $form->radio('status',__('Status'))->options(['draft' => 'Darft', 'closed'=> 'Closed', 'public'=>'public'])->default('draft');
-        
+        $form->hidden('user_id')->default($userId);
         // $categories = DB::select('select * from categories where father_id=0');
         // $categories = DB::table('categories')->where('father_id', 1)->get();
         // var_dump($categories);
