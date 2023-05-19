@@ -4,19 +4,20 @@ namespace App\Admin\Controllers;
 
 use Illuminate\Support\Facades\Auth;
 use App\Models\Category;
+use App\Models\Post;
 use Encore\Admin\Controllers\AdminController;
 use Encore\Admin\Form;
 use Encore\Admin\Grid;
 use Encore\Admin\Show;
 
-class CategoryController extends AdminController
+class PostController extends AdminController
 {
   /**
    * Title for current resource.
    *
    * @var string
    */
-  protected $title = 'Category';
+  protected $title = 'Post';
 
   /**
    * Make a grid builder.
@@ -25,16 +26,17 @@ class CategoryController extends AdminController
    */
   protected function grid()
   {
-    $grid = new Grid(new Category());
+    $grid = new Grid(new Post());
 
     $grid->column('id', __('Id'));
-    $grid->column('title', __('Name'));
+    $grid->column('title', __('Title'));
     $grid->column('icon', __('Icon'));
-    $grid->column('father_id', __('Category Id'));
+    $grid->column('category_id', __('Category Id'));
     $grid->column('user_id', __('User Id'));
-    $grid->column('amount', __('amount'));
-    $grid->column('description', __('Description'));
+    $grid->column('content', __('Content'));
     $grid->column('status', __('Status'));
+    $grid->column('post_type', __('Post Type'));
+    $grid->column('company_role', __('Company Role'));
     $grid->column('created_at', __('Created at'))->hide();
     $grid->column('updated_at', __('Updated at'));
 
@@ -49,19 +51,22 @@ class CategoryController extends AdminController
    */
   protected function detail($id)
   {
-    $show = new Show(Category::findOrFail($id));
+    $show = new Show(Post::findOrFail($id));
 
 
     $show->field('id', __('Id'));
-    $show->field('title', __('Name'));
-    $show->field('icon', __('Email'));
-    $show->field('father_id', __('Category Id'));
+    $show->field('title', __('Title'));
+    $show->field('icon', __('Icon'));
+    $show->field('category_id', __('Category Id'));
     $show->field('user_id', __('User Id'));
-    $show->field('amount', __('amount'));
-    $show->field('description', __('Description'));
+    $show->field('content', __('Content'));
     $show->field('status', __('Status'));
-    $show->field('created_at', __('Created at'));
+    $show->field('post_type', __('Post Type'));
+    $show->field('company_role', __('Company Role'));
+    $show->field('created_at', __('Created at'))->hide();
     $show->field('updated_at', __('Updated at'));
+
+
 
     return $show;
   }
@@ -77,20 +82,20 @@ class CategoryController extends AdminController
     $category = new Category();
     $categoryTree = $category->getTree();
 
-    $form = new Form(new Category());
 
 
+    $form = new Form(new Post());
     $form->text('title', __('Name'))->required();
 
     $form->icon('icon', __('Icon'));
-    $form->select('father_id', __('Category Id'))->options($categoryTree)->default(0);
+    $form->select('category_id', __('Category Id'))->options($categoryTree)->default(0);
 
 
     // $form->text('user_id', __('User Id'))->default($userId)->disable();
     // $form->ckeditor('description', __('Description'));
-    $form->textarea('description', __('Description'));
+    $form->textarea('content', __('Content'));
     // $form->text('status', __('Status'));
-    $form->radio('status', __('Status'))->options(['draft' => 'Darft', 'closed' => 'Closed', 'public' => 'public'])->default('draft');
+    $form->radio('status', __('Status'))->options(Post::$statusOptions)->default('draft');
     $form->hidden('user_id')->default($userId);
     // $categories = DB::select('select * from categories where father_id=0');
     // $categories = DB::table('categories')->where('father_id', 1)->get();

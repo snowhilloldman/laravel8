@@ -1,4 +1,6 @@
 {
   "editor.formatOnPaste": true,
-  "editor.formatOnSave": true
+  "editor.formatOnSave": true,
+  "bladeFormatter.format.indentSize": 2,
+  "editor.tabSize": 2
 }
