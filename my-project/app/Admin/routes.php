@@ -16,9 +16,13 @@ Route::group([
   $router->resource('user', UserController::class);
   $router->resource('category', CategoryController::class);
   $router->resource('post', PostController::class);
+  $router->resource('news', NewsController::class);
+  $router->resource('org', OrgController::class);
+  $router->resource('ugc', UgcController::class);
 
   Route::get('r/student', function () {
     return redirect(config('app.url') . '/student');
   });
+  $router->post('ckeditor/upload', 'CkeditorController@upload');
 
 });

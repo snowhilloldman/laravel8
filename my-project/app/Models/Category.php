@@ -16,7 +16,12 @@ class Category extends Model
     'public' => 'public'
   ];
 
-  private $categoryOptions = array(0 => 'root');
+  public function posts()
+  {
+    return $this->hasOne(Post::class, 'id');
+  }
+
+  private $categoryOptions = array();
 
   private function categoriesSelectGenerate($id = 0, $depth = 1)
   {
@@ -28,8 +33,12 @@ class Category extends Model
       $this->categoriesSelectGenerate($item->id, $depth + 1);
     }
   }
-  public function getTree()
+  public function getTree($root = null)
   {
+    if ('root' == $root) {
+      // array(0 => 'root');
+      $this->categoryOptions[0] = 'root';
+    }
     $this->categoriesSelectGenerate();
     return $this->categoryOptions;
   }

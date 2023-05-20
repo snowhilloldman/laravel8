@@ -75,7 +75,7 @@ class CategoryController extends AdminController
   {
     $userId = Auth::user()->id;
     $category = new Category();
-    $categoryTree = $category->getTree();
+    $categoryTree = $category->getTree('root');
 
     $form = new Form(new Category());
 

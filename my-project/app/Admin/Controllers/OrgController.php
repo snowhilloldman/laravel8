@@ -9,34 +9,16 @@ use Encore\Admin\Controllers\AdminController;
 use Encore\Admin\Form;
 use Encore\Admin\Grid;
 use Encore\Admin\Show;
-use Encore\Admin;
 
-class PostController extends AdminController
+class OrgController extends AdminController
 {
   /**
    * Title for current resource.
    *
    * @var string
    */
-  protected $title = 'Post';
-  protected $type = '';
-
-
-
-  public function __construct()
-  {
-
-    $query = request()->query();
-    // var_dump($query);
-    if (isset($query['type']) && isset(Post::$postTypeOptions[$query['type']])) {
-      $this->title = Post::$postTypeOptions[$query['type']];
-      $this->type = $query['type'];
-    } else {
-      // exit(config('app.url'));
-      exit("<a href='" . config('app.url') . "/admin'>back</a>");
-      // exit("<a href='" . admin_base_path('home') . "'>back</a>");
-    }
-  }
+  protected $title = 'ORG-TK机构/卖家/服务商/MCN等';
+  protected $type = 'org';
 
   /**
    * Make a grid builder.
@@ -47,6 +29,7 @@ class PostController extends AdminController
   {
 
     $grid = new Grid(new Post());
+    $grid->model()->where('post_type', '=', 'org');
 
     $grid->column('id', __('Id'));
     $grid->column('title', __('Title'));
@@ -120,6 +103,7 @@ class PostController extends AdminController
 
     $form->radio('status', __('Status'))->options(Post::$statusOptions)->default('draft');
     $form->hidden('user_id')->default($userId);
+    $form->hidden('post_type')->default($this->type);
 
     return $form;
   }
