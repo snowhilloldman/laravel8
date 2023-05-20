@@ -99,7 +99,8 @@ class OrgController extends AdminController
 
 
 
-    $form->ckeditor('content', __('Content'));
+    $form->editor('content', __('Content'));
+    $form->map('org_geo', __('地理位置'));
 
     $form->radio('status', __('Status'))->options(Post::$statusOptions)->default('draft');
     $form->hidden('user_id')->default($userId);

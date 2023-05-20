@@ -23,7 +23,14 @@ Route::group([
   Route::get('r/student', function () {
     return redirect(config('app.url') . '/student');
   });
+  Route::get('r/filemanager', function () {
+    return redirect(config('app.url') . '/laravel-filemanager/demo');
+  });
   // $router->post('ckeditor/upload', 'CkeditorController@upload');
   $router->post('uploads', 'CkeditorController@upload');
 
+});
+
+Route::group(['prefix' => 'laravel-filemanager', 'middleware' => ['web', 'auth']], function () {
+  \UniSharp\LaravelFilemanager\Lfm::routes();
 });
