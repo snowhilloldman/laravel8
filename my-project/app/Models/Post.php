@@ -10,6 +10,8 @@ class Post extends Model
   use HasFactory;
   protected $title = 'Post';
 
+  protected $orderBy = 'updated_at DESC';
+
 
   static $statusOptions = [
     'draft' => 'Darft',

@@ -31,6 +31,7 @@ class NewsController extends AdminController
 
     $grid = new Grid(new Post());
     $grid->model()->where('post_type', '=', 'news');
+    $grid->model()->orderBy('updated_at', 'DESC');
     $grid->column('id', __('Id'));
     $grid->column('title', __('Title'));
     $grid->column('icon', __('Icon'));
@@ -99,8 +100,9 @@ class NewsController extends AdminController
 
 
 
-    $form->ckeditor('content', __('Content'));
+    // $form->ckeditor('content', __('Content'));
 
+    $form->editor('content', __('Content'));
     $form->radio('status', __('Status'))->options(Post::$statusOptions)->default('draft');
     $form->hidden('user_id')->default($userId);
 

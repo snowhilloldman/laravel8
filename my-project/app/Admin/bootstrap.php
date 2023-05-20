@@ -18,7 +18,9 @@
  *
  */
 use Encore\Admin\Form;
-// use App\Admin\Extensions\Form\CKEditor;
+use App\Admin\Extensions\Form\CKEditor;
 
-Form::forget(['map', 'editor']);
+// Form::forget(['map', 'editor']);
+
 // Form::extend('ckeditor', CKEditor::class);
+Form::extend('editor', \ghost\CKEditor\Editor::class);

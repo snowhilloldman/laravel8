@@ -23,6 +23,7 @@ Route::group([
   Route::get('r/student', function () {
     return redirect(config('app.url') . '/student');
   });
-  $router->post('ckeditor/upload', 'CkeditorController@upload');
+  // $router->post('ckeditor/upload', 'CkeditorController@upload');
+  $router->post('uploads', 'CkeditorController@upload');
 
 });

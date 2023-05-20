@@ -1,3 +1,8 @@
+安装:
+php artisan storage:link
+把storage 软链接到public
+/app/public/storage -> /app/storage/app/public
+
  根据数据库生成文件
  php artisan admin:generate
 php artisan make:model ModelName -m
