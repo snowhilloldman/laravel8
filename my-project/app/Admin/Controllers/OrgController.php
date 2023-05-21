@@ -5,6 +5,7 @@ namespace App\Admin\Controllers;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Category;
 use App\Models\Post;
+use App\Models\City;
 use Encore\Admin\Controllers\AdminController;
 use Encore\Admin\Form;
 use Encore\Admin\Grid;
@@ -36,13 +37,22 @@ class OrgController extends AdminController
     $grid->column('icon', __('Icon'));
     // $grid->column('category_id', __('Category Id'));
     $grid->category_id()->display(function ($category_id) {
-      return Category::find($category_id)->title;
+      $c = Category::find($category_id);
+      return $c ? $c->title : '';
     });
     $grid->column('user_id', __('User Id'));
     $grid->column('content', __('Content'))->hide();
     $grid->column('status', __('Status'));
-    $grid->column('post_type', __('Post Type'));
-    $grid->column('company_role', __('Company Role'));
+    $grid->province()->display(function ($province) {
+      $p = City::find($province);
+      return $p ? $p->name : '';
+    });
+    // $grid->column('city', __('City'));
+    $grid->city()->display(function ($city) {
+      $p = City::find($city);
+      return $p ? $p->name : '';
+    });
+    $grid->column('org_role', __('Company Role'));
     $grid->column('created_at', __('Created at'))->hide();
     $grid->column('updated_at', __('Updated at'));
 
@@ -67,8 +77,9 @@ class OrgController extends AdminController
     $show->field('user_id', __('User Id'));
     $show->field('content', __('Content'));
     $show->field('status', __('Status'));
-    $show->field('post_type', __('Post Type'));
-    $show->field('company_role', __('Company Role'));
+    $show->field('province', __('Province'));
+    $show->field('city', __('city'));
+    $show->field('org_role', __('Company Role'));
     $show->field('created_at', __('Created at'))->hide();
     $show->field('updated_at', __('Updated at'));
 
@@ -89,18 +100,21 @@ class OrgController extends AdminController
     $categoryTree = $category->getTree();
 
 
-
     $form = new Form(new Post());
+
+
     // $form->setWidth(100);
     $form->text('title', __('Name'))->required();
 
     $form->icon('icon', __('Icon'));
-    $form->select('category_id', __('Category Id'))->options($categoryTree)->default(0);
+    $form->select('category_id', __('Category Id'))->options($categoryTree)->default(0)->required();
 
+    $form->select('province', 'Province')->options(City::deep0Options())->load('city', '/api/city');
 
+    $form->select('city', "城市")->options(City::deep1Options());
 
     $form->editor('content', __('Content'));
-    $form->map('org_geo', __('地理位置'));
+
 
     $form->radio('status', __('Status'))->options(Post::$statusOptions)->default('draft');
     $form->hidden('user_id')->default($userId);

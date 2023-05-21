@@ -3,6 +3,7 @@
 use Illuminate\Routing\Router;
 use App\Admin\Controllers\UserController;
 
+// use Encore\Admin\Admin;
 
 Admin::routes();
 
@@ -23,14 +24,26 @@ Route::group([
   Route::get('r/student', function () {
     return redirect(config('app.url') . '/student');
   });
-  Route::get('r/filemanager', function () {
-    return redirect(config('app.url') . '/laravel-filemanager/demo');
-  });
+  // Route::get('r/filemanager2', function () {
+  //   return redirect(config('app.url') . '/laravel-filemanager/demo');
+  // });
   // $router->post('ckeditor/upload', 'CkeditorController@upload');
   $router->post('uploads', 'CkeditorController@upload');
 
 });
 
-Route::group(['prefix' => 'laravel-filemanager', 'middleware' => ['web', 'auth']], function () {
-  \UniSharp\LaravelFilemanager\Lfm::routes();
-});
+// Route::group([
+//   'namespace' => 'App\Admin\API',
+//   'prefix' => 'admin/api',
+//   'middleware' => ['admin'],
+//   'as' => 'admin.api.'
+// ], function (Router $router) {
+//   // 其他路由定义...
+//   $router->get('city', function () {
+//     exit('asdf');
+//     // $provinceId = $request->get('q');
+//     // return DB::select->where('parent_id', $provinceId)->get(['id', DB::raw('name as text')]);
+//     return [1 => 'beijing', 2 => 'shanghai'];
+//     exit;
+//   });
+// });

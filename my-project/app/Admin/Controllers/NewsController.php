@@ -37,7 +37,11 @@ class NewsController extends AdminController
     $grid->column('icon', __('Icon'));
     // $grid->column('category_id', __('Category Id'));
     $grid->category_id()->display(function ($category_id) {
-      return Category::find($category_id)->title;
+      if (Category::find($category_id)) {
+        return Category::find($category_id)->title;
+      } else {
+        return $category_id;
+      }
     });
     $grid->column('user_id', __('User Id'));
     $grid->column('content', __('Content'))->hide();

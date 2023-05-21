@@ -23,20 +23,20 @@ class PostController extends AdminController
 
 
 
-  public function __construct()
-  {
+  // public function __construct()
+  // {
 
-    $query = request()->query();
-    // var_dump($query);
-    if (isset($query['type']) && isset(Post::$postTypeOptions[$query['type']])) {
-      $this->title = Post::$postTypeOptions[$query['type']];
-      $this->type = $query['type'];
-    } else {
-      // exit(config('app.url'));
-      exit("<a href='" . config('app.url') . "/admin'>back</a>");
-      // exit("<a href='" . admin_base_path('home') . "'>back</a>");
-    }
-  }
+  //   $query = request()->query();
+  //   // var_dump($query);
+  //   if (isset($query['type']) && isset(Post::$postTypeOptions[$query['type']])) {
+  //     $this->title = Post::$postTypeOptions[$query['type']];
+  //     $this->type = $query['type'];
+  //   } else {
+  //     // exit(config('app.url'));
+  //     exit("<a href='" . config('app.url') . "/admin'>back</a>");
+  //     // exit("<a href='" . admin_base_path('home') . "'>back</a>");
+  //   }
+  // }
 
   /**
    * Make a grid builder.
@@ -53,7 +53,11 @@ class PostController extends AdminController
     $grid->column('icon', __('Icon'));
     // $grid->column('category_id', __('Category Id'));
     $grid->category_id()->display(function ($category_id) {
-      return Category::find($category_id)->title;
+      if (Category::find($category_id)) {
+        return Category::find($category_id)->title;
+      } else {
+        return $category_id;
+      }
     });
     $grid->column('user_id', __('User Id'));
     $grid->column('content', __('Content'))->hide();

@@ -447,7 +447,8 @@ return [
             'insertTable',
             'mediaEmbed',
             'undo',
-            'redo'
+            'redo',
+            'source'
           ]
         ],
         'image' => [
@@ -480,5 +481,5 @@ return [
   ],
   'media-manager' => [
     'disk' => 'public' // Points to the disk set in config/filesystem.php
-  ],
+  ]
 ];

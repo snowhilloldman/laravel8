@@ -1,0 +1,36 @@
+﻿id,pid,deep,name,pinyin_prefix,pinyin,ext_name
+11,0,0,北京,b,bei jing,北京市
+12,0,0,天津,t,tian jin,天津市
+13,0,0,河北,h,he bei,河北省
+14,0,0,山西,s,shan xi,山西省
+15,0,0,内蒙古,n,nei meng gu,内蒙古自治区
+21,0,0,辽宁,l,liao ning,辽宁省
+22,0,0,吉林,j,ji lin,吉林省
+23,0,0,黑龙江,h,hei long jiang,黑龙江省
+31,0,0,上海,s,shang hai,上海市
+32,0,0,江苏,j,jiang su,江苏省
+33,0,0,浙江,z,zhe jiang,浙江省
+34,0,0,安徽,a,an hui,安徽省
+35,0,0,福建,f,fu jian,福建省
+36,0,0,江西,j,jiang xi,江西省
+37,0,0,山东,s,shan dong,山东省
+41,0,0,河南,h,he nan,河南省
+42,0,0,湖北,h,hu bei,湖北省
+43,0,0,湖南,h,hu nan,湖南省
+44,0,0,广东,g,guang dong,广东省
+45,0,0,广西,g,guang xi,广西壮族自治区
+46,0,0,海南,h,hai nan,海南省
+50,0,0,重庆,c,chong qing,重庆市
+51,0,0,四川,s,si chuan,四川省
+52,0,0,贵州,g,gui zhou,贵州省
+53,0,0,云南,y,yun nan,云南省
+54,0,0,西藏,x,xi zang,西藏自治区
+61,0,0,陕西,s,shan xi,陕西省
+62,0,0,甘肃,g,gan su,甘肃省
+63,0,0,青海,q,qing hai,青海省
+64,0,0,宁夏,n,ning xia,宁夏回族自治区
+65,0,0,新疆,x,xin jiang,新疆维吾尔自治区
+71,0,0,台湾,~3,tai wan,台湾省
+81,0,0,香港,~1,xiang gang,香港特别行政区
+82,0,0,澳门,~2,ao men,澳门特别行政区
+91,0,0,国外,~4,guo wai,国外

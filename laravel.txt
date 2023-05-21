@@ -12,6 +12,9 @@ php artisan make:model ModelName -m
 - make:factory - 生成模型工厂文件
 - make:policy - 生成授权策略文件
 
+清楚cache
+php artisan admin:clear 
+php artisan cache:clear
 
 备份
 mysqldump -u root  --add-drop-database > database/backup23051806.sql

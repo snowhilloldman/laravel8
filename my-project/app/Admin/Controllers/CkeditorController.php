@@ -15,7 +15,7 @@ class CkeditorController extends AdminController
       $extension = $request->file('upload')->getClientOriginalExtension();
       $fileName = 'aaaa' . $fileName . '_' . time() . '.' . $extension;
 
-      // $request->file('upload')->move(storage_path('app/public/uploads/ckeditor'), $fileName);
+      $request->file('upload')->move(storage_path('app/public/uploads/ckeditor'), $fileName);
 
       $CKEditorFuncNum = $request->input('CKEditorFuncNum');
       $url = asset('storage/uploads/ckeditor/' . $fileName);
@@ -30,7 +30,6 @@ class CkeditorController extends AdminController
       // file_put_contents(storage_path('app/public/uploads/ckeditor/file.txt'), $response);
       // @header('Content-type: text/html; charset=utf-8');
       // echo $response;
-      exit();
     }
   }
 }

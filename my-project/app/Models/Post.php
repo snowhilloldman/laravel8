@@ -28,6 +28,11 @@ class Post extends Model
   static $orgRoleOptions = array('MCN', '卖家', '服务商', '教培', '全部');
 
 
+  static function citiesOpetion($id)
+  {
+
+  }
+
   public function category()
   {
     return $this->belongsTo(Category::class, 'id');
