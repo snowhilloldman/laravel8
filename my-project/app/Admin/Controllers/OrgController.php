@@ -40,9 +40,8 @@ class OrgController extends AdminController
       $c = Category::find($category_id);
       return $c ? $c->title : '';
     });
-    $grid->column('user_id', __('User Id'));
-    $grid->column('content', __('Content'))->hide();
-    $grid->column('status', __('Status'));
+
+
     $grid->province()->display(function ($province) {
       $p = City::find($province);
       return $p ? $p->name : '';
@@ -53,6 +52,7 @@ class OrgController extends AdminController
       return $p ? $p->name : '';
     });
     $grid->column('org_role', __('Company Role'));
+    $grid->column('status', __('Status'));
     $grid->column('created_at', __('Created at'))->hide();
     $grid->column('updated_at', __('Updated at'));
 
@@ -107,14 +107,22 @@ class OrgController extends AdminController
     $form->text('title', __('Name'))->required();
 
     $form->icon('icon', __('Icon'));
+    $form->image('logo', 'logo')->removable();
     $form->select('category_id', __('Category Id'))->options($categoryTree)->default(0)->required();
 
     $form->select('province', 'Province')->options(City::deep0Options())->load('city', '/api/city');
 
     $form->select('city', "城市")->options(City::deep1Options());
+    $form->text('address', '地址');
 
+    $form->text('telephone', '电话');
+    $form->text('website', '网址');
+    $form->image('wechat', '联系人微信');
+    $form->image('wechat_gz', '公众号');
+    $form->text('telephone', '电话');
     $form->editor('content', __('Content'));
 
+    $form->text('brief', '简要');
 
     $form->radio('status', __('Status'))->options(Post::$statusOptions)->default('draft');
     $form->hidden('user_id')->default($userId);
