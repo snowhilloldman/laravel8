@@ -30,11 +30,14 @@ class OrgController extends AdminController
   {
 
     $grid = new Grid(new Post());
-    $grid->model()->where('post_type', '=', 'org');
+    $grid->model()->where('post_type', '=', "org");
+    $grid->model()->orderByDesc('updated_at');
+    $grid->model()->orderByDesc('id');
+    $grid->quickSearch('title', 'brief', 'content');
 
-    $grid->column('id', __('Id'));
-    $grid->column('title', __('Title'));
-    $grid->column('icon', __('Icon'));
+    $grid->column('id', __('Id'))->sortable();
+    $grid->column('title', __('Title'))->sortable();
+    // $grid->column('icon', __('Icon'));
     // $grid->column('category_id', __('Category Id'));
     $grid->category_id()->display(function ($category_id) {
       $c = Category::find($category_id);
@@ -42,19 +45,20 @@ class OrgController extends AdminController
     });
 
 
-    $grid->province()->display(function ($province) {
-      $p = City::find($province);
-      return $p ? $p->name : '';
-    });
+    // $grid->province()->display(function ($province) {
+    //   $p = City::find($province);
+    //   return $p ? $p->name : '';
+    // });
     // $grid->column('city', __('City'));
-    $grid->city()->display(function ($city) {
-      $p = City::find($city);
-      return $p ? $p->name : '';
-    });
-    $grid->column('org_role', __('Company Role'));
-    $grid->column('status', __('Status'));
+    // $grid->city()->display(function ($city) {
+    //   $p = City::find($city);
+    //   return $p ? $p->name : '';
+    // });
+    $grid->column('website', __('Website'));
+    // $grid->column('org_role', __('Company Role'));
+    $grid->column('status', __('Status'))->sortable();
     $grid->column('created_at', __('Created at'))->hide();
-    $grid->column('updated_at', __('Updated at'));
+    $grid->column('updated_at', __('Updated at'))->hide();
 
     return $grid;
   }
@@ -73,6 +77,15 @@ class OrgController extends AdminController
     $show->field('id', __('Id'));
     $show->field('title', __('Title'));
     $show->field('icon', __('Icon'));
+    $show->field('logo', __('Logo'));
+
+    $show->logo_remote()->display(function ($logo_remote) {
+      if ($logo_remote) {
+        return '<img src="' . env('APP_URL') . '/storage/' . $logo_remote . '"';
+      } else {
+        return '';
+      }
+    });
     $show->field('category_id', __('Category Id'));
     $show->field('user_id', __('User Id'));
     $show->field('content', __('Content'));
@@ -108,6 +121,7 @@ class OrgController extends AdminController
 
     $form->icon('icon', __('Icon'));
     $form->image('logo', 'logo')->removable();
+    $form->url('logo_remote', 'Logo Remote');
     $form->select('category_id', __('Category Id'))->options($categoryTree)->default(0)->required();
 
     $form->select('province', 'Province')->options(City::deep0Options())->load('city', '/api/city');
@@ -117,8 +131,9 @@ class OrgController extends AdminController
 
     $form->text('telephone', '电话');
     $form->text('website', '网址');
-    $form->image('wechat', '联系人微信');
-    $form->image('wechat_gz', '公众号');
+    $form->url('wechat', '联系人微信');
+    $form->url('wechat_gz', '公众号');
+    $form->url('douyin', '抖音号');
     $form->text('telephone', '电话');
     $form->editor('content', __('Content'));
 

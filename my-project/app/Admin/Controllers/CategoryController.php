@@ -26,13 +26,14 @@ class CategoryController extends AdminController
   protected function grid()
   {
     $grid = new Grid(new Category());
+    $grid->model()->orderByDesc('rank');
 
     $grid->column('id', __('Id'));
     $grid->column('title', __('Name'));
     $grid->column('icon', __('Icon'));
     $grid->column('father_id', __('Category Id'));
     $grid->column('user_id', __('User Id'));
-    $grid->column('amount', __('amount'));
+    $grid->column('rank', __('Rank'));
     $grid->column('description', __('Description'));
     $grid->column('status', __('Status'));
     $grid->column('created_at', __('Created at'))->hide();
@@ -85,7 +86,7 @@ class CategoryController extends AdminController
     $form->icon('icon', __('Icon'));
     $form->select('father_id', __('Category Id'))->options($categoryTree)->default(0);
 
-
+    $form->number('rank', __('Rank'));
     // $form->text('user_id', __('User Id'))->default($userId)->disable();
     // $form->ckeditor('description', __('Description'));
     $form->textarea('description', __('Description'));

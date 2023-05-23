@@ -141,6 +141,10 @@ https://github.com/LaravelDaily/Larav...
 </body>
 </html>
 
+
+https://learnku.com/articles/5513/laravel-admin-development-notes
+自定义laravel-admin的技巧
+
 在 Git 中,如果你还未提交修改(commit),可以很轻易地撤销修改。
 主要有两种方式:
 1. 撤销对文件的修改 - git checkout -- <file>
